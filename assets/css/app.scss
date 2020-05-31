@@ -15,6 +15,11 @@
     src: url(../fonts/archivo-narrow-regular.ttf) format('truetype');
 }
 
+@font-face {
+    font-family: 'Quattrocento Sans';
+    src: url(../fonts/QuattrocentoSans-Regular.ttf) format('truetype');
+}
+
 :root {
     --blue: #007bff;
     --indigo: #6610f2;
@@ -35,7 +40,7 @@
     --info: #17a2b8;
     --warning: #ffc107;
     --danger: #dc3545;
-    --light: #F0EFEA;
+    --light: #FFFFFF;
     --dark: #626D71;
     --breakpoint-xs: 0;
     --breakpoint-sm: 576px;
@@ -48,10 +53,56 @@
 
 body {
     background-color: var(--light);
-    font-family: 'Julius';
+    font-family: "Quattrocento Sans";
     color:var(--primary);
+
+
 }
 
-.navbar-light .navbar-nav .active > .nav-link {
-    color: var(--primary);
+.navbar {
+
+    .navbar-nav {
+        justify-content: space-around;
+        width: 100%;
+        border-bottom: thin solid var(--dark);
+
+        .nav-item{
+
+            background-color: rgba(0, 0, 0, 0);
+            line-height: 21px;
+
+            word-spacing: 0;
+
+            font-weight: 400;
+            font-style: normal;
+            font-variant: normal;
+            text-align: center;
+            text-indent: 0px;
+
+            font-size: 14px;
+            letter-spacing: 1px;
+            padding: 1.5em;
+            text-decoration: none;
+            text-transform: uppercase;
+        }
+    }
 }
+
+//resetting navbar color theme
+.navbar-light .navbar-nav .nav-link{
+    $color: rgb(20, 70, 145);
+    color: $color;
+    opacity:70%;
+
+    &.active{
+        color: $color;
+        opacity:100%;
+    }
+
+    &.disabled{
+        color: $color;
+        opacity:50%;
+    }
+}
+
+
