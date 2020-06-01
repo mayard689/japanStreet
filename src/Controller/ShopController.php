@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+use App\Model\MuseumRepository;
+
 use App\Services\Files\VariousFileTools;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -22,17 +24,16 @@ class ShopController extends AbstractController
      */
     public function visit()
     {
-        $objects=getObjectFromMuseum();
-        
-        $shopList=$this->getAvailableShopPictures();
-        return $this->render('shop/all.html.twig',['objects'=>$objects]);
+        $objects=$this->getObjectFromMuseum();
+
+          return $this->render('shop/all.html.twig',['objects'=>$objects]);
     }
 
     public function getObjectFromMuseum() : array
     {
         $museum=new MuseumRepository();
 
-        return $museum->getByCulture(3, 'japan');
+        return $museum->getObjectsByCulture(3, 'japan');
     }
 
 
