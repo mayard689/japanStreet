@@ -1,0 +1,10 @@
+
+    <div class="shop-list d-flex  align-items-baseline">
+
+                {% for shop in shopList %}
+                    <div class="shop">
+                        <img src="{{ asset('build/pictures/shops/'~shop~'.png') }}" class="img-fluid mx-auto d-block" alt="{{shop}}">
+                    </div>
+                {% endfor %}
+
+    </div>
