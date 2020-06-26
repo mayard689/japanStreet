@@ -2,7 +2,8 @@
 
 namespace App\Controller;
 
-use App\Model\MuseumRepository;
+use App\Repository\MuseumRepository;
+use App\Repository\WindyRepository;
 
 use App\Services\Files\VariousFileTools;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -25,8 +26,9 @@ class ShopController extends AbstractController
     public function visit()
     {
         $objects=$this->getObjectFromMuseum();
+        $picture=$this->getImageFromCamera();
 
-          return $this->render('shop/all.html.twig',['objects'=>$objects]);
+          return $this->render('shop/all.html.twig',['objects'=>$objects, 'picture'=>$picture]);
     }
 
     public function getObjectFromMuseum() : array
@@ -36,7 +38,12 @@ class ShopController extends AbstractController
         return $museum->getObjectsByCulture(3, 'japan');
     }
 
+    public function getImageFromCamera() : string
+    {
+        $camera=new WindyRepository();
 
+        return $camera->getPicture();
+    }
 
 
 }

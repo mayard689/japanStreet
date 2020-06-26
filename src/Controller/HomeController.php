@@ -28,7 +28,7 @@ class HomeController extends AbstractController
 
     public static function getAvailableShopPictures() : array
     {
-        $path=$_SERVER['DOCUMENT_ROOT'].'build/pictures/shops/';
+        $path=$_SERVER['DOCUMENT_ROOT'].'../assets/images/spots/';
         $files=VariousFileTools::getAvailableFiles($path);
         return array_map(function($x){return substr($x,0,-4);}, $files);
     }

@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Model;
+namespace App\Repository;
 
 use Symfony\Component\HttpClient\HttpClient;
 
 /**
  *
  */
-class MuseumRepository
+class WindyRepository
 {
 
     protected $client;
@@ -25,13 +25,13 @@ class MuseumRepository
      * get data from the object with the given id
      * use var dump to check available keys
      */
-    public function getObject(int $objectId): array
+    public function getPicture(int $webcamid=1525295653): string
     {
         $content=null;
-
+        $apiKey="N4JQbLhh5stOTNr6HnKt9KUSwB8qwO5q";
         $response = $this->client->request(
             'GET',
-            'https://collectionapi.metmuseum.org/public/collection/v1/objects/'.$objectId
+            "https://api.windy.com/api/webcams/v2/list/webcam=".$webcamid."?show=webcams:image&key=".$apiKey
         );
 
         $statusCode = $response->getStatusCode(); // get Response status code 200
@@ -43,134 +43,7 @@ class MuseumRepository
             $content = $response->toArray();
             // convert the response (here in JSON) to an PHP array
         }
-
-        return $content;
+        $image=$content['result']['webcams']['0']['image']['current']['thumbnail'];
+        return $image;
     }
-
-
-    /**
-     * get random objects id from the given department
-     * if department is not provided, defaut is 10 (egypt)
-     * @param int $number : number iof Id we want
-     * @param int $dptId
-     * @return array
-     */
-    public function getIdFromDpt(int $number): array
-    {
-        $dptId=6;//asia
-
-        $content=null;
-        $objectIds=array();
-
-        $response = $this->client->request(
-            'GET',
-            'https://collectionapi.metmuseum.org/public/collection/v1/objects?departmentIds='.$dptId
-        );
-
-
-        $statusCode = $response->getStatusCode(); // get Response status code 200
-
-        if ($statusCode === 200) {
-            $content = $response->getContent();
-            // get the response in JSON format
-
-            $content = $response->toArray();
-            $idList=$content['objectIDs'];
-            // convert the response (here in JSON) to an PHP array
-
-            $totalObjectNumber=count($idList);
-            $iii=0;
-            while ($iii<$number) {
-                $index=rand(0, $totalObjectNumber);
-                $id=$idList[$index];
-                $objectData=$this->getObject($id);
-                $objectImageURL=$objectData['primaryImageSmall'];
-                if (strlen($objectImageURL)>5) {
-                    $iii++;
-                    $objectIds[]=$id;
-                }
-            }
-        }
-
-        return $objectIds;
-    }
-
-    public function getIdByCulture(int $number, string $culture="japan") {
-
-        $content=null;
-        $objectIds=array();
-
-        $response = $this->client->request(
-            'GET',
-            'https://collectionapi.metmuseum.org/public/collection/v1/search?artistOrCulture=true&q='.$culture
-        );
-
-
-        $statusCode = $response->getStatusCode(); // get Response status code 200
-
-        if ($statusCode === 200) {
-            $content = $response->getContent();
-            // get the response in JSON format
-
-            $content = $response->toArray();
-            $idList=$content['objectIDs'];
-            // convert the response (here in JSON) to an PHP array
-
-            $totalObjectNumber=count($idList);
-            $iii=0;
-            while ($iii<$number) {
-                $index=rand(0, $totalObjectNumber);
-                $id=$idList[$index];
-                $objectData=$this->getObject($id);
-                $objectImageURL=$objectData['primaryImageSmall'];
-                if (strlen($objectImageURL)>5) {
-                    $iii++;
-                    $objectIds[]=$id;
-                }
-            }
-        }
-
-        return $objectIds;
-    }
-
-    public function getObjectsByCulture(int $number, string $culture="japan")
-    {
-        $content=null;
-        $objectIds=array();
-        $objects=array();
-
-        $response = $this->client->request(
-            'GET',
-            'https://collectionapi.metmuseum.org/public/collection/v1/search?artistOrCulture=true&q='.$culture
-        );
-
-
-        $statusCode = $response->getStatusCode(); // get Response status code 200
-
-        if ($statusCode === 200) {
-            $content = $response->getContent();
-            // get the response in JSON format
-
-            $content = $response->toArray();
-            $idList=$content['objectIDs'];
-            // convert the response (here in JSON) to an PHP array
-
-            $totalObjectNumber=count($idList);
-            $iii=0;
-            while ($iii<$number) {
-                $index=rand(0, $totalObjectNumber);
-                $id=$idList[$index];
-                $objectData=$this->getObject($id);
-                $objectImageURL=$objectData['primaryImageSmall'];
-                if (strlen($objectImageURL)>5 && !in_array($id, $objectIds)) {
-                    $iii++;
-                    $objectIds[]=$id;
-                    $objects[]=$objectData;
-                }
-            }
-        }
-
-        return $objects;
-    }
-
 }
