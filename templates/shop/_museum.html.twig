@@ -1,0 +1,8 @@
+
+{% for object in objects %}
+    <p>Title :</p><p class="title">{{ object.title }}</p>
+    <img src="{{ object.primaryImageSmall }}">
+    <p>Artiste :</p><p class="author">{{ object.artistDisplayName }}</p>
+    <p>Periode :</p><p class="period">{{ object.period }}</p>
+    <p>Origine :</p><p class="origin">{{ object.city }}, {{ object.state }}</p>
+{% endfor %}

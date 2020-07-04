@@ -1,7 +1,15 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-<body>
-    Ceci est mon Projet
-</body>
+<main>
+
+    <div class="scroll-container">
+    <div class="cityBackground parallax-container1">
+    <div class="cityBuilding parallax-container2">
+        {% include('home/_shopList.html.twig') %}
+    </div>
+    </div>
+    </div>
+
+</main>
 {% endblock %}
