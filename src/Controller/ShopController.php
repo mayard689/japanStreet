@@ -21,9 +21,9 @@ class ShopController extends AbstractController
     /**
      * @return string
      *
-     * @Route("/visit", name="visit")
+     * @Route("/visit/{id}", name="visit")
      */
-    public function visit()
+    public function visit(?Shop $shop)
     {
         $objects=$this->getObjectFromMuseum();
         $picture=$this->getImageFromCamera();

@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Repository\ShopRepository;
 use App\Services\Files\VariousFileTools;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -20,9 +21,9 @@ class HomeController extends AbstractController
      *
      * @Route("", name="index")
      */
-    public function index()
+    public function index(ShopRepository $shopRepository)
     {
-        $shopList=$this->getAvailableShopPictures();
+        $shopList=$shopRepository->findAll();
         return $this->render('home/index.html.twig',['shopList'=>$shopList]);
     }
 
