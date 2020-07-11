@@ -27,6 +27,11 @@ class Shop
      */
     private $picture;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $template;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -52,6 +57,18 @@ class Shop
     public function setPicture(string $picture): self
     {
         $this->picture = $picture;
+
+        return $this;
+    }
+
+    public function getTemplate(): ?string
+    {
+        return $this->template;
+    }
+
+    public function setTemplate(string $template): self
+    {
+        $this->template = $template;
 
         return $this;
     }

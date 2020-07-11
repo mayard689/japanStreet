@@ -1,0 +1,30 @@
+<div class="museum-object">
+    <div class="container">
+        <div class="row">
+            <p>Nous vous présentons l'oeuvre appelée</p>
+        </div>
+
+        <div class="row">
+            <h2 class="title">{{ object.title }}</h2>
+        </div>
+
+        <div class="row">
+            <div class="col-6 pl-0">
+                <img loading="lazy" class="object-picture" src="{{ object.primaryImageSmall }}">
+            </div>
+
+            <div class="col-6">
+                {% if not object.artistDisplayName is empty %}
+                    <p>Artiste :</p><p class="author">{{ object.artistDisplayName }}</p>
+                {% endif %}
+
+                <p>Periode :</p><p class="period">{{ object.period }}</p>
+                <p>Origine :</p><p class="origin">{{ object.city }}, {{ object.state }}</p>
+            </div>
+
+
+        </div>
+
+    </div>
+</div>
+

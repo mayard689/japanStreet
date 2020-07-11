@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Shop;
 use App\Repository\MuseumRepository;
 use App\Repository\WindyRepository;
 
@@ -25,10 +26,30 @@ class ShopController extends AbstractController
      */
     public function visit(?Shop $shop)
     {
+        $method=$shop->getTemplate();
+        if (! method_exists($this, $method)) {
+            $method="all";
+        }
+
+        return call_user_func_array([$this, $method], array($shop));
+    }
+
+    private function all(Shop $shop)
+    {
         $objects=$this->getObjectFromMuseum();
         $picture=$this->getImageFromCamera();
+        return $this->render('shop/all.html.twig',['objects'=>$objects, 'picture'=>$picture]);
+    }
 
-          return $this->render('shop/all.html.twig',['objects'=>$objects, 'picture'=>$picture]);
+    private function museum(Shop $shop)
+    {
+        $objects=$this->getObjectFromMuseum();
+        return $this->render(
+            'shop/'.$shop->getTemplate().'/place.html.twig',
+            [
+                'objects'=>$objects,
+                'shop' => $shop,
+            ]);
     }
 
     public function getObjectFromMuseum() : array
