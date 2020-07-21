@@ -1,5 +1,6 @@
+@import "_vars";
 @import "~bootstrap/scss/bootstrap";
-@import "shopCarousel.scss";
+@import "buttonStyle";
 
 @font-face {
     font-family: 'Source Sans';
@@ -35,14 +36,13 @@
     --white: #fff;
     --gray: #6c757d;
     --gray-dark: #343a40;
-    --primary: #A10115;
-    --secondary: #D72C16;
+
     --success: #28a745;
     --info: #17a2b8;
     --warning: #ffc107;
     --danger: #dc3545;
     --light: #FFFFFF;
-    --dark: #626D71;
+
     --breakpoint-xs: 0;
     --breakpoint-sm: 576px;
     --breakpoint-md: 768px;
@@ -50,9 +50,9 @@
     --breakpoint-xl: 1200px;
     --font-family-sans-serif: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
     --font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-}
 
-$background:var(--white);
+
+}
 
 *{
     _box-sizing: border-box;
@@ -61,11 +61,12 @@ $background:var(--white);
 .navbar {
 
     padding:0;
+    height : $navbar-height;
 
     .navbar-nav {
         justify-content: space-around;
         width: 100%;
-        border-bottom: thin solid var(--dark);
+        border-bottom: thin solid $dark;
         background-color: $background;
 
         .nav-item{
@@ -88,6 +89,8 @@ $background:var(--white);
             text-transform: uppercase;
         }
     }
+
+    z-index: 100;
 }
 
 //resetting navbar color theme
@@ -110,7 +113,7 @@ $background:var(--white);
 body {
     background-color: var(--light);
     font-family: "Quattrocento Sans";
-    color:var(--primary);
+    color:$primary;
 }
 
 main{
@@ -119,7 +122,6 @@ main{
 
 .scroll-container{
     overflow: scroll;
-    _min-width: max-content;
 }
 
 .cityBackground {
@@ -138,7 +140,6 @@ main{
 
 .shop-list{
     min-width : 100%;
-    border : thin solid red;
     display: flex;
     flex-wrap: nowrap;
 }

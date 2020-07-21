@@ -3,24 +3,40 @@
 {% block stylesheets %}
     {{ parent() }}
     {{ encore_entry_link_tags(placeTemplate) }}
+
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <link href="https://cdn.rawgit.com/michalsnik/aos/2.1.1/dist/aos.css" rel="stylesheet">
+    <script src="https://cdn.rawgit.com/michalsnik/aos/2.1.1/dist/aos.js"></script>
+
+    <script>
+        AOS.init({
+            easing: "ease-out",
+            duration: 600,
+        });
+    </script>
+
 {% endblock %}
 
 {% block main %}
     <main class="p-0" id="{{placeTemplate}}">
 
-        <div class="min-vh-100 w-100 d-flex align-items-center justify-content-around">
-            <img class="h-100" src="{{ asset('build/images/Nezu-1.jpg') }}" class="img-fluid mx-auto d-block" alt="Nezu">
-            <blockquote cite="https://www.vivrelejapon.com/ville-tokyo/musee-nezu" class="introduction">
+        <div class="screen">
+            <img src="{{ asset('build/images/Nezu-1.jpg') }}" class="img-fluid mx-auto d-block" alt="Nezu">
+            <blockquote class="introduction" cite="https://www.vivrelejapon.com/ville-tokyo/musee-nezu">
                 <p>Un paravent de bambous, une allée bordée de galets, un mur aux couleurs chaudes invitent dans un « lien entre » à passer dans un autre monde, à l’écart des agitations et des signes ostentatoires avoisinants. Après trois ans et demi de fermeture, le musée, véritable oasis urbaine, a fait peau neuve pour rouvrir en octobre 2009. L’architecte KUMA Kengo a créé dans une merveille végétale un édifice aux murs de verre soutenant un impressionnant toit de tuiles.</p>
                 <cite><a href="https://www.vivrelejapon.com/ville-tokyo/musee-nezu">Vivre Le Japon</a></cite>
             </blockquote>
         </div>
 
-        <div class="object-list">
+        <div class="object-list container card-deck">
             {% for object in objects %}
                 {{  include('shop/'~placeTemplate~'/_object.html.twig') }}
             {% endfor %}
         </div>
+
     </main>
 {% endblock %}
-

@@ -44,6 +44,7 @@ class ShopController extends AbstractController
     private function museum(Shop $shop)
     {
         $objects=$this->getObjectFromMuseum();
+
         return $this->render(
             'shop/'.$shop->getTemplate().'/place.html.twig',
             [
