@@ -1,0 +1,39 @@
+<div class="card museum-object" data-aos="fade-up" data-aos-offset="{{ loop.index0 * 200 }}">
+
+    <div class="img-wrapper">
+        <img loading="lazy" class="object-picture" src="{{ object.primaryImageSmall }}">
+    </div>
+
+    <h2 class="title">{{ object.title }}</h2>
+
+    <button type="button" class="see-object btn btn-primary" data-toggle="modal" data-target="#objectModal{{ object.objectID }}">
+        Voir cet objet
+    </button>
+</div>
+
+<!-- Modal -->
+<div class="modal fade object-modal" id="objectModal{{ object.objectID }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">{{ object.title }}</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+
+                <img loading="lazy" class="object-picture" src="{{ object.primaryImageSmall }}">
+                {% if not object.artistDisplayName is empty %}
+                    <p>Artiste :</p><p class="author">{{ object.artistDisplayName }}</p>
+                {% endif %}
+                <p>Periode :</p><p class="period">{{ object.period }}</p>
+                <p>Origine :</p><p class="origin">{{ object.city }}, {{ object.state }}</p>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary underline-bottom" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,108 @@
+@import "_vars";
+
+.screen{
+
+}
+
+%shadow{
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
+}
+
+.introduction{
+    position: absolute;
+    right: 10%;
+    bottom: 10%;
+
+    width: 30%;
+
+    padding: 20px;
+
+    background-color: #FFFFFFCC;
+
+    p{
+        font-size: 24px;
+        font-weight: bold;
+    }
+}
+
+.object-list{
+    @extend %shadow !optional;
+
+    background-image: url("../images/patterns/ombrelles.png");
+
+    justify-content: space-evenly;
+
+    margin-top: $spacing-w-normal;
+    margin-bottom: $spacing-w-normal;
+    padding-top : $spacing-h-large;
+    padding-bottom : $spacing-h-large;
+
+    min-width:100vw;
+
+    .museum-object{
+        @extend %shadow !optional;
+
+        align-items: center;
+
+        height:65vh;
+
+        margin-left:5vw;
+        margin-right:5vw;
+
+        .img-wrapper{
+            display:flex;
+            align-items: center;
+            justify-content: center;
+
+            min-height:50%;
+            max-height: 50%;
+
+            width:100%;
+            overflow:hidden;
+            object-fit: scale-down;
+
+            background : #b21f2d;
+
+            padding: $spacing-h-small;
+
+            .object-picture{
+                max-width: 100%;
+                max-height: 100%;
+            }
+        }
+
+        .title{
+            text-align: center;
+            margin: $spacing-h-small;
+            padding-top : $spacing-h-small;
+
+            border-top:thin solid $primary;
+
+            min-height:25%;
+            max-height: 25%;
+
+            overflow:hidden;
+        }
+
+        .see-object{
+            margin: $spacing-h-small;
+        }
+    }
+}
+
+.object-modal .modal-content{
+
+    max-height:95vh;
+    .modal-body{
+        display:flex;
+        flex-direction: column;
+
+        .object-picture{
+            align-self: center;
+        }
+    }
+
+
+}
+
+

@@ -1,0 +1,163 @@
+@mixin filling($direction) {
+
+  $color:$light;
+  $hover-color:$primary;
+  $text-color:$primary;
+  $hover-text-color:$light;
+  $speed:1s;
+
+  position:relative;
+  background-color:transparent;
+  color:$text-color;
+  overflow:hidden;
+  z-index:10;
+  transition: 2 * $speed;
+  box-sizing: border-box;
+
+  &:before{
+    content:" ";
+    height : 100%;
+    width:100%;
+    position:absolute;
+    top:0;
+    left:0;
+    background:$color;
+    z-index:-2;
+  }
+
+  &:after{
+    content:" ";
+    height : 100%;
+    width:100%;
+    position:absolute;
+    background:$hover-color;
+    transition:$speed;
+    z-index:-1;
+    box-sizing: content-box;
+    border:none;
+
+    @if $direction == 'up' {
+      top:90%;
+      left:0;
+    }
+
+    @if $direction == 'down' {
+      top:-90%;
+      left:0;
+    }
+
+    @if $direction == 'left' {
+      left:-90%;
+      top:0;
+    }
+
+    @if $direction == 'right' {
+      left:90%;
+      top:0;
+    }
+  }
+
+  &:hover{
+    &:after{
+      top:0;
+      left:0;
+      color:$hover-text-color;
+    }
+  }
+}
+
+.filling-up {
+  @include filling('up');
+}
+
+.filling-down {
+  @include filling('down');
+}
+
+.filling-left {
+  @include filling('left');
+}
+
+.filling-right {
+  @include filling('right');
+}
+
+@mixin underline($direction) {
+
+  $hover-color:$secondary;
+  $speed:1s;
+  $stroke-width:2px;
+  $initial-width:50%;
+
+  position:relative;
+  overflow:hidden;
+  transition: 2 * $speed;
+
+  &:after{
+    content:" ";
+
+    position:absolute;
+    background:$hover-color;
+    transition:$speed;
+    border:none;
+
+    @if $direction == 'bottom' {
+      height : $stroke-width;
+      width:$initial-width;
+      bottom:0;
+      left:50%-$initial-width/2;
+    }
+
+    @if $direction == 'top' {
+      height : $stroke-width;
+      width:$initial-width;
+      top:0;
+      left:50%-$initial-width/2;
+    }
+
+    @if $direction == 'left' {
+      width : $stroke-width;
+      height:$initial-width;
+      left:0;
+      top:50%-$initial-width/2;
+    }
+
+    @if $direction == 'right' {
+      width : $stroke-width;
+      height:$initial-width;
+      right:0;
+      top:50%-$initial-width/2;
+    }
+  }
+
+  &:hover{
+    &:after{
+      @if $direction == 'bottom' or $direction == 'up' {
+        width: 100%;
+        left: 0;
+      }
+
+      @if $direction == 'left' or $direction == 'right' {
+        height: 100%;
+        top: 0;
+      }
+    }
+  }
+}
+
+.underline-bottom{
+  @include underline('bottom');
+}
+
+.underline-top{
+  @include underline('top');
+}
+
+.underline-left{
+  @include underline('left');
+}
+
+.underline-right{
+  @include underline('right');
+}
+

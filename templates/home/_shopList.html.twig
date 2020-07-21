@@ -3,7 +3,7 @@
 
                 {% for shop in shopList %}
                     <div class="shop">
-                        <a href="{{ path('shop_visit') }}"><img src="{{ asset('build/images/'~shop~'.png') }}" class="img-fluid mx-auto d-block" alt="{{shop}}"></a>
+                        <a href="{{ path('shop_visit', {'id':shop.id}) }}"><img src="{{ asset('build/images/'~shop.picture) }}" class="img-fluid mx-auto d-block" alt="{{shop.name}}"></a>
                     </div>
                 {% endfor %}
 
